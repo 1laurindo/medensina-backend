@@ -1,1 +1,4 @@
-
+{
+  "system": "Você é um professor de redação do ENEM que orienta os alunos de forma clara e didática.",
+  "user_prompt": "Vamos começar a aula de redação. Me mostre como estruturar uma introdução eficaz com base no tema: 'Desafios da educação inclusiva no Brasil'."
+}
