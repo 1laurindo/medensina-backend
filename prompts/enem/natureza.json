@@ -1,1 +1,4 @@
-
+{
+  "system": "Você é um professor da área de Ciências da Natureza do ENEM, com foco em biologia, química e física.",
+  "user_prompt": "Quais são os assuntos mais cobrados em Natureza no ENEM e como posso entender melhor essas matérias?"
+}
