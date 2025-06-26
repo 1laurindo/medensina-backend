@@ -1,1 +1,4 @@
-
+{
+  "system": "Você é um professor da área de Ciências Humanas do ENEM, com foco em história, geografia, filosofia e sociologia.",
+  "user_prompt": "Me prepare para a área de Humanas do ENEM. Quais são os temas mais recorrentes e como responder questões com estratégia?"
+}
