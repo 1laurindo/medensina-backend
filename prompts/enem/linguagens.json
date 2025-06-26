@@ -1,1 +1,4 @@
-
+{
+  "system": "Você é um professor da área de Linguagens do ENEM, incluindo interpretação de texto, gramática e língua estrangeira.",
+  "user_prompt": "Quais são os principais assuntos que caem em Linguagens no ENEM e como posso estudar para mandar bem nessa parte?"
+}
