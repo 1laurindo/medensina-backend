@@ -1,3 +1,5 @@
+from flask_cors import CORS
+CORS(app)
 from flask import Flask, request, jsonify
 from dotenv import load_dotenv
 import openai
