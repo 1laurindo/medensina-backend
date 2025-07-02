@@ -4,11 +4,12 @@ from dotenv import load_dotenv
 import openai
 import os
 import json
+import traceback
 
 load_dotenv()
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "*"}})
+CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
@@ -30,7 +31,7 @@ def aula():
         return jsonify({"resposta": resposta})
 
     except Exception as e:
-        print("Erro:", e)
+        print("Erro:", traceback.format_exc())
         return jsonify({"erro": "Não foi possível iniciar a aula"}), 500
 
 if __name__ == "__main__":
