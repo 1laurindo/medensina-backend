@@ -8,7 +8,7 @@ import json
 load_dotenv()
 
 app = Flask(__name__)
-CORS(app) 
+CORS(app, resources={r"/*": {"origins": "https://9dd37ffe-599d-41a3-b3c9-8fa7b54bb67f-00-1yb5vf5vyy8h0.kirk.replit.dev"}})
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
