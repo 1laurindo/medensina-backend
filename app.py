@@ -8,7 +8,7 @@ import json
 load_dotenv()
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "https://9dd37ffe-599d-41a3-b3c9-8fa7b54bb67f-00-1yb5vf5vyy8h0.kirk.replit.dev"}})
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
@@ -16,29 +16,22 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 def aula():
     try:
         data = request.get_json()
-        universidade = data.get("universidade", "")
-        modulo = data.get("modulo", "")
-        pergunta = data.get("pergunta", "")
+        universidade = data.get("universidade")
+        modulo = data.get("modulo")
 
-        if not universidade or not modulo or not pergunta:
-            return jsonify({"resposta": "Informações incompletas."}), 400
+        prompt_base = f"Você é um professor interativo. Dê as boas-vindas ao aluno no módulo {modulo} da universidade {universidade}. Seja gentil, didático e convide o aluno a tirar dúvidas."
 
-        prompt = f"Você é um professor da universidade {universidade}. No módulo {modulo}, o aluno perguntou: {pergunta}. Responda de forma didática e clara."
-
-        resposta = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
-            messages=[
-                {"role": "system", "content": "Você é um professor inteligente e paciente."},
-                {"role": "user", "content": prompt}
-            ]
+        response = openai.ChatCompletion.create(
+            model="gpt-4",  # ou "gpt-3.5-turbo"
+            messages=[{"role": "user", "content": prompt_base}]
         )
 
-        texto_resposta = resposta["choices"][0]["message"]["content"]
-        return jsonify({"resposta": texto_resposta})
+        resposta = response.choices[0].message["content"]
+        return jsonify({"resposta": resposta})
 
     except Exception as e:
         print("Erro:", e)
-        return jsonify({"resposta": "Erro ao gerar resposta."}), 500
+        return jsonify({"erro": "Não foi possível iniciar a aula"}), 500
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000)
