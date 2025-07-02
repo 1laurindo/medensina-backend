@@ -19,11 +19,21 @@ def aula():
         data = request.get_json()
         universidade = data.get("universidade")
         modulo = data.get("modulo")
+        pergunta = data.get("pergunta", "")
 
-        prompt_base = f"Você é um professor interativo. Dê as boas-vindas ao aluno no módulo {modulo} da universidade {universidade}. Seja gentil, didático e convide o aluno a tirar dúvidas."
+        if pergunta == "introducao":
+            prompt_base = (
+                f"Você é um professor interativo chamado Professor Core. Dê as boas-vindas ao aluno que escolheu o módulo '{modulo}' na universidade '{universidade}'. "
+                "Seja gentil, acolhedor e didático. Explique o que será abordado nesse módulo de forma empolgante. Convide o aluno a fazer perguntas para aprofundar ainda mais seu aprendizado."
+            )
+        else:
+            prompt_base = (
+                f"Você é o Professor Core, um assistente educacional interativo. Responda de forma clara, prática e acolhedora à pergunta do aluno sobre o módulo '{modulo}' da universidade '{universidade}'. "
+                f"Pergunta: {pergunta}"
+            )
 
         response = openai.ChatCompletion.create(
-            model="gpt-4",  # ou "gpt-3.5-turbo"
+            model="gpt-4",
             messages=[{"role": "user", "content": prompt_base}]
         )
 
