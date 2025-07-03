@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from flask_cors import CORS
+from flask_cors import cross_origin
 from dotenv import load_dotenv
 import openai
 import os
@@ -8,11 +8,10 @@ import traceback
 load_dotenv()
 
 app = Flask(__name__)
-CORS(app)  # <-- CORS corrigido aqui
-
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 @app.route("/aula", methods=["POST"])
+@cross_origin(origins="*")  # LIBERA o frontend para acessar
 def aula():
     try:
         data = request.get_json()
