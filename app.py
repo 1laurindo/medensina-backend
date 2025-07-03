@@ -3,13 +3,12 @@ from flask_cors import CORS
 from dotenv import load_dotenv
 import openai
 import os
-import json
 import traceback
 
 load_dotenv()
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
+CORS(app)  # <-- CORS corrigido aqui
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
@@ -23,12 +22,15 @@ def aula():
 
         if pergunta == "introducao":
             prompt_base = (
-                f"Você é um professor interativo chamado Professor Core. Dê as boas-vindas ao aluno que escolheu o módulo '{modulo}' na universidade '{universidade}'. "
-                "Seja gentil, acolhedor e didático. Explique o que será abordado nesse módulo de forma empolgante. Convide o aluno a fazer perguntas para aprofundar ainda mais seu aprendizado."
+                f"Você é um professor interativo chamado Professor Core. "
+                f"Dê as boas-vindas ao aluno que escolheu o módulo '{modulo}' na universidade '{universidade}'. "
+                "Seja gentil, acolhedor e didático. Explique o que será abordado nesse módulo de forma empolgante. "
+                "Convide o aluno a fazer perguntas para aprofundar ainda mais seu aprendizado."
             )
         else:
             prompt_base = (
-                f"Você é o Professor Core, um assistente educacional interativo. Responda de forma clara, prática e acolhedora à pergunta do aluno sobre o módulo '{modulo}' da universidade '{universidade}'. "
+                f"Você é o Professor Core, um assistente educacional interativo. "
+                f"Responda de forma clara, prática e acolhedora à pergunta do aluno sobre o módulo '{modulo}' da universidade '{universidade}'. "
                 f"Pergunta: {pergunta}"
             )
 
